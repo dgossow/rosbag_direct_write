@@ -235,8 +235,7 @@ DirectFile::DirectFile(std::string filename, bool use_odirect)
   // Try to open in O_DIRECT mode.
   int fd = open(filename.c_str(), flags, mode);
   if (fd < 0) {
-    throw BagFileException(std::string("Failed to open file: ") + filename,
-                           errno);
+    open_ = false;
   }
   file_descriptor_ = fd;
 #endif
